@@ -4,6 +4,4 @@ practice practice practice make....
 hi i am from Git
 =======
 practice practice ....hello world 
->>>>>>> 5ba5e0a78071772a814d00d23a38590bbd88a7e3
-------------
-i am confusing for ....
+
