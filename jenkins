@@ -22,6 +22,9 @@ pipeline{
 		stage('Deploy') {
 			steps {
 				echo 'This is Deploy stage'
+				curl -X POST --data-urlencode "payload={\"channel\": \"#my-channel-here\", \"username\": \"webhookbot\", \"text\": \"This is posted to #my-channel-here and comes from a bot named webhookbot.\", \"icon_emoji\": \":ghost:\"}" https://hooks.slack.com/services/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
+
+
 			}
 		}
 	}
