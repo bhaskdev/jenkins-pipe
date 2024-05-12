@@ -3,7 +3,7 @@ pipeline{
 	stages {
 		stage('GIT checckout') {
 			steps {
-				checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhaskdev/jenkins-pipe.git']])
+				checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhaskdev/jenkins-pipe.git']])
 			}
 		}
 
