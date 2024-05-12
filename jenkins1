@@ -1,0 +1,29 @@
+pipeline{
+	agent any
+	stages {
+		stage('GIT checckout') {
+			steps {
+				checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/bhaskdev/jenkins-pipe.git']])
+			}
+		}
+
+		stage('Build') {
+			steps {
+				echo 'This is Build stage'
+			}
+		}
+
+		stage('Push') {
+			steps {
+				echo 'This is push stage'
+			}
+		}
+
+		stage('Deploy') {
+			steps {
+				echo 'This is Deploy stage'
+			}
+		}
+	}
+}
+
