@@ -10,9 +10,9 @@ pipeline {
                 git branch: 'main', credentialsId: 'github', url: 'https://github.com/bhaskdev/jenkins-pipe.git'
             }
         }
-        stage ('Build') {
+        stage('Build') {
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean package'
             }
         }
         stage ('Deploy tomcat'){
