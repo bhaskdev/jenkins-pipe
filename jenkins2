@@ -1,0 +1,33 @@
+pipeline{
+    agent any
+        tools {
+            maven 'maven-3.8.6'
+        
+    }
+        stages{
+            stage ('Build Maven'){
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'f6c77a84-8127-4421-9cce-3cd9b6fb9d18', url: 'https://github.com/bhaskdev/jenkins-pipe.git']])
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage ('Build Docker image'){
+            steps {
+                script{
+                    sh 'docker build -t bhaskar108/java-bh:1.0.1 .'
+                }
+            }
+        }
+            stage ('Push Docker image'){
+                steps {
+                    script{
+                        withCredentials([string(credentialsId: 'bhaskar108', variable: 'docker-pwd')]) {
+                        sh 'docker login -u bhaskar108 -p ${docker-pwd}'
+}
+ 
+                    sh 'docker push bhaskar108/java-bh:1.0.1' 
+                    }
+                }
+            }
+        }
+    }
