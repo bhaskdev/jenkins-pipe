@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Specify Maven tool installation
-        maven 'Maven3'
+        maven 'Maven'
     }
 
     stages {
@@ -24,17 +24,16 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Deploy the WAR file to Tomcat
-                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.86.230.7:8080/')], contextPath: null, war: '**/*.war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://18.209.179.129:8080/')], contextPath: null, war: '**/*.war'
             }
-                
             }
             }
             post {
         success {
-            slackSend channel: '#jenkins', color: 'good', message: 'Successfully deployed online book store into Tomcat server', notifyCommitters: true, teamDomain: 'bhaskardevops', tokenCredentialId: 'bhaskardevops'
+            slackSend channel: '#jenkins', color: 'good', message: 'Successfully deployed online book store on Tomcat server', teamDomain: 'bhaskardevops', tokenCredentialId: 'slack-token'
         }
         failure {
-            slackSend channel: '#jenkins', color: 'danger', failOnError: true, message: 'Unsuccessful deployment. Please check the Tomcat URL.', notifyCommitters: true, teamDomain: 'bhaskardevops', tokenCredentialId: 'bhaskardevops'
+            slackSend channel: '#jenkins', color: 'danger', message: 'Unsuccessful deployment. Please check the Tomcat URL.', teamDomain: 'bhaskardevops', tokenCredentialId: 'slack-token'
         }
         }
     }
